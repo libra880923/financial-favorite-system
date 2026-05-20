@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/financial_db?useSSL=false&serverTimezone=Asia/Taipei&characterEncoding=UTF-8
+    username: root          # 請替換為你的 MySQL 帳號
+    password: yourpassword  # 請替換為你的 MySQL 密碼
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none        # 使用自建 DDL，不讓 JPA 自動建表
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+  # 安全性設定（關閉預設的 Basic Auth，由我們自己設定）
+  security:
+    user:
+      name: admin
+      password: admin123
+
+logging:
+  level:
+    com.example: DEBUG
