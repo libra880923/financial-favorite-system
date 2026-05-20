@@ -1,4 +1,4 @@
-package com.example.financial_favorite.Repostory;
+package com.example.financial_favorite.Repository;
 
 import com.example.financial_favorite.entity.LikeList;
 import org.springframework.data.jpa.repository.JpaRepository;
