@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
-public class LikeLikstRequestDTO {
+public class LikeListRequestDTO {
     @NotBlank(message = "使用者ID不可為空")
     @Size(max = 20, message = "使用者ID長度不可超過20")
     private String userID;

@@ -1,4 +1,4 @@
-package com.example.financial_favorite.Service;
+package com.example.financial_favorite.Service.Impl;
 
 import com.example.financial_favorite.DTO.*;
 import jakarta.persistence.*;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class LikeListServiceImpl {
      * 新增喜好金融商品（呼叫 SP_AddLikeList）
      */
     @Transactional
-    public ApiResponse addLikeList(LikeListRequestDTO dto) {
+    public ApiResponse<Void> addLikeList(LikeListRequestDTO dto) {
         StoredProcedureQuery query = em.createStoredProcedureQuery("SP_AddLikeList");
         query.registerStoredProcedureParameter("p_UserID", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_ProductNo", Integer.class, ParameterMode.IN);
@@ -49,12 +48,13 @@ public class LikeListServiceImpl {
      * 查詢喜好金融商品清單（呼叫 SP_QueryLikeList）
      */
     @Transactional(readOnly = true)
-    public ApiResponse queryLikeList(String userID) {
+    public ApiResponse<List<LikeListResponseDTO>> queryLikeList(String userID) {
         StoredProcedureQuery query = em.createStoredProcedureQuery("SP_QueryLikeList");
         query.registerStoredProcedureParameter("p_UserID", String.class, ParameterMode.IN);
         query.setParameter("p_UserID", userID);
         query.execute();
 
+        @SuppressWarnings("unchecked")
         List<Object[]> rows = query.getResultList();
         List<LikeListResponseDTO> result = new ArrayList<>();
         for (Object[] row : rows) {
@@ -77,7 +77,7 @@ public class LikeListServiceImpl {
      * 更新喜好金融商品（呼叫 SP_UpdateLikeList）
      */
     @Transactional
-    public ApiResponse updateLikeList(Integer sn, LikeListRequestDTO dto) {
+    public ApiResponse<Void> updateLikeList(Integer sn, LikeListRequestDTO dto) {
         StoredProcedureQuery query = em.createStoredProcedureQuery("SP_UpdateLikeList");
         query.registerStoredProcedureParameter("p_SN", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_ProductNo", Integer.class, ParameterMode.IN);
@@ -103,7 +103,7 @@ public class LikeListServiceImpl {
      * 刪除喜好金融商品（呼叫 SP_DeleteLikeList）
      */
     @Transactional
-    public ApiResponse deleteLikeList(Integer sn) {
+    public ApiResponse<Void> deleteLikeList(Integer sn) {
         StoredProcedureQuery query = em.createStoredProcedureQuery("SP_DeleteLikeList");
         query.registerStoredProcedureParameter("p_SN", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_Result", Integer.class, ParameterMode.OUT);
