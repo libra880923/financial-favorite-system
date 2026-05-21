@@ -1,9 +1,8 @@
 package com.example.financial_favorite.Controller;
 
-import com.example.financial_favorite.DTO.ApiResponse;
-import com.example.financial_favorite.DTO.LikeListResponseDTO;
-import com.example.financial_favorite.dto.*;
-import com.example.financial_favorite.service.impl.LikeListServiceImpl;
+import com.example.financial_favorite.DTO.*;
+import com.example.financial_favorite.Service.LikeListService;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LikeListController {
 
-    private final LikeListServiceImpl likeListService;
+    private final LikeListService likeListService;
 
     /** POST /api/v1/likelist — 新增喜好金融商品 */
     @PostMapping

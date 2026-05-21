@@ -1,4 +1,4 @@
-package com.example.financial_favorite.Entity;
+package com.example.financial_favorite.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
